@@ -15,6 +15,7 @@ spring:
     username: minsang
     password: minsang
     driver-class-name: com.mysql.cj.jdbc.Driver
+
   jpa:
     defer-datasource-initialization: true
     hibernate.ddl-auto: create
@@ -22,5 +23,4 @@ spring:
     properties:
       hibernate.format_sql: true
       hibernate.default_batch_fetch_size: 100
-  h2.console.enabled: true
   sql.init.mode: always
