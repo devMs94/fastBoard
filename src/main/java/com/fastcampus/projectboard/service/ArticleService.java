@@ -36,4 +36,7 @@ public class ArticleService {
     public void deleteArticle(long articleId) {
     }
 
+    public ArticleDto searchArticle(long l) {
+        return null;
+    }
 }
