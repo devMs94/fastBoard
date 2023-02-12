@@ -1,12 +1,19 @@
 package com.fastcampus.projectboard.controller;
 
+import com.fastcampus.projectboard.domain.type.SearchType;
+import com.fastcampus.projectboard.dto.response.ArticleResponse;
+import com.fastcampus.projectboard.dto.response.ArticleWithCommentsResponse;
+import com.fastcampus.projectboard.service.ArticleService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import java.util.List;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /*
     /articles
@@ -18,10 +25,21 @@ import java.util.List;
 @Controller
 public class ArticleController {
 
+    private final ArticleService articleService;
+
+    public ArticleController(@Autowired ArticleService articleService) {
+        this.articleService = articleService;
+    }
+
     @GetMapping
-    public String articles(ModelMap map)
+    public String articles(
+            @RequestParam(required = false)SearchType searchType,
+            @RequestParam(required = false)String searchValue,
+            @PageableDefault(size=10, sort="createdAt", direction = Sort.Direction.DESC) Pageable pageable,
+            ModelMap map
+            )
     {
-        map.addAttribute("articles", List.of());
+        map.addAttribute("articles", articleService.searchArticles(searchType,searchValue,pageable).map(ArticleResponse::from));
         return "articles/index";
     }
 
@@ -29,8 +47,9 @@ public class ArticleController {
     @GetMapping("/{articleId}")
     public String article(@PathVariable Long articleId, ModelMap map)
     {
-        map.addAttribute("article", "article"); // TODO: 구현할 떄 여기에 실제 데이터를 넣어줘야 한다.
-        map.addAttribute("articleComments", List.of());
+        ArticleWithCommentsResponse article = ArticleWithCommentsResponse.from(articleService.getArticle(articleId));
+        map.addAttribute("article", article);
+        map.addAttribute("articleComments", article.articleCommentResponses());
         return "articles/detail";
     }
 
