@@ -1,4 +1,4 @@
-ackage com.fastcampus.projectboard.service;
+package com.fastcampus.projectboard.service;
 
 import com.fastcampus.projectboard.domain.Article;
 import com.fastcampus.projectboard.domain.ArticleComment;
