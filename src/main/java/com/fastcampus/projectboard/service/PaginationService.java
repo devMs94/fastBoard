@@ -3,7 +3,6 @@ package com.fastcampus.projectboard.service;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.Map;
 import java.util.stream.IntStream;
 
 @Service
@@ -25,6 +24,5 @@ public class PaginationService {
     public int currentBarLength(){
         return BAR_LENGTH;
     }
-
 
 }
