@@ -14,9 +14,9 @@ spring:
 #    url: jdbc:mysql://localhost:3306/board
 #    username: minsang
 #    password: minsang
-    url: ${DATABASE_URL}
-    username: ${USER}
-    password: ${PASSWORD}
+    url: ap-northeast.connect.psdb.cloud
+    username: r7vwvakjdwikvywoyemw
+    password: pscale_pw_5ocNtxtDzWpyILvs8QZ9EvzaAsbSIU1Dm8dVesEYbcZ
     driver-class-name: com.mysql.cj.jdbc.Driver
 
   jpa:
