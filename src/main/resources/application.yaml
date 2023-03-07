@@ -40,5 +40,7 @@ spring:
     config.activate.on-profile: heroku
     datasource:
       url: ${DATABASE_URL}
+      username: ${USER}
+      password: ${PASSWORD}
     jpa.hibernate.ddl-auto: create
     sql.init.mode: always
